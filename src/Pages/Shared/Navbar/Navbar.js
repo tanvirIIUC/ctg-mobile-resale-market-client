@@ -5,6 +5,7 @@ const Navbar = () => {
 
     const items = <>
         <li><Link to='/'>Home</Link></li>
+        <li><Link to='/login'>Login</Link></li>
     </>
     return (
         <div className=' bg-slate-800'>
