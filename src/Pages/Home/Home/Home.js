@@ -1,9 +1,15 @@
 import React from 'react';
+import Banner from '../Banner/Banner';
+import Section from '../Section/Section';
+import ProductCategories from './ProductCategories/ProductCategories';
 
 const Home = () => {
     return (
-        <div>
-            <h1>this id home</h1>
+        <div className=' mx-auto'>
+            <Banner></Banner>
+            <ProductCategories></ProductCategories>
+
+            <Section></Section>
         </div>
     );
 };
