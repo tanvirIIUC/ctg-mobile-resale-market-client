@@ -1,28 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 const Login = () => {
-      //
-    //   const navigate = useNavigate();
-    //   const location = useLocation();
-    //   const from = location.state?.from?.pathname || "/";
-      //
+      
+      const navigate = useNavigate();
+       const location = useLocation();
+   const from = location.state?.from?.pathname || "/";
+      
       const { register, formState: { errors }, handleSubmit } = useForm();
-    //   const { logIn } = useContext(AuthContext)
+      const { logIn } = useContext(AuthContext)
       const handleSignup = data => {
            console.log(data)
-          /* logIn(data.email, data.password)
+          logIn(data.email, data.password)
               .then((result) => {
   
                   const user = result.user;
                   alert("log in Successfull")
-                  navigate(from, { replace: true });
+                   navigate(from, { replace: true });
   
               })
               .catch((error) => {
                   alert("error")
-              }); */
+              });
       }
     return (
         <div className="hero min-h-screen bg-base-200">

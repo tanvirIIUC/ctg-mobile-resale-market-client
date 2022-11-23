@@ -1,19 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    // const { createUser, updateUserProfile } = useContext(AuthContext);
+     const { createUser, updateUserProfile } = useContext(AuthContext);
 
     const handleRegister = data => {
         console.log(data)
-        /*  createUser(data.email, data.password)
+         createUser(data.email, data.password)
              .then(result => {
  
                  const user = result.user;
                  alert("Create Successfull")
-                 saveuser(data.name,data.email)
+                //  saveuser(data.name,data.email)
  
                  const profile = {
                      displayName: data.name,
@@ -21,7 +22,7 @@ const Register = () => {
                  }
                  updateUserProfile(profile)
                      .then(() => {
-                         navigate('/login')
+                         Navigate('/login')
                      })
                      .catch(error => console.error(error));
  
@@ -29,7 +30,7 @@ const Register = () => {
              .catch((error) => {
                  console.error(error)
  
-             }); */
+             });
     }
     return (
 
