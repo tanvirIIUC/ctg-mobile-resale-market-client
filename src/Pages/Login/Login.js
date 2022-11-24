@@ -12,7 +12,7 @@ const Login = () => {
       const { register, formState: { errors }, handleSubmit } = useForm();
       const { logIn } = useContext(AuthContext)
       const handleSignup = data => {
-           console.log(data)
+        //    console.log(data)
           logIn(data.email, data.password)
               .then((result) => {
   
