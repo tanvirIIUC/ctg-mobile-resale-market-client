@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import BookModal from '../BookModal/BookModal';
 
 const CategoryItem = () => {
     const collections = useLoaderData();
-    
-    
+    const [title,setTitle]= useState('');
+    const [price,setPrice]= useState('');
+
+
     console.log(collections)
     return (
-        <div className='container mx-auto'>
+        <div className='container mx-auto my-10'>
             <h1>item : {collections.length}</h1>
             <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
                 {
@@ -15,7 +18,7 @@ const CategoryItem = () => {
                         <div className="card card-compact w-96 bg-base-100 shadow-xl">
                             <figure><img className='object-cover h-60' src={collection.image} alt="" /></figure>
                             <div className="card-body">
-                                <h2 className="card-title">{collections.title}</h2>
+                                <h2 className="card-title">{collection.title}</h2>
                                 <p>Location:{collection.location}</p>
                                 <p>Resale  Price:{collection.resalePrice}</p>
                                 <p>Orginal Price:{collection.orginalPrice}</p>
@@ -23,12 +26,25 @@ const CategoryItem = () => {
                                 <p>Post Time:{collection.postTime}</p>
                                 <p>Seller Name:{collection.sellerName}</p>
                                 <div className="card-actions justify-end">
-                                    <button className="btn btn-primary">Buy Now</button>
+                                    {/* <button className="btn btn-primary">Book Now</button> */}
+                                    <label 
+                                    onClick={()=>{
+                                        setTitle(collection.title)
+                                        setPrice(collection.resalePrice)
+                                    }}
+                                    htmlFor="my-modal" 
+                                    className="btn">open modal</label>
                                 </div>
+                                <BookModal
+                                    setTitle
+                                    title={title}
+                                    price={price}
+                                ></BookModal>
                             </div>
                         </div>
                     </div>)
                 }
+
             </div>
         </div>
     );
