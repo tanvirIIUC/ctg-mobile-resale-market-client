@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 const BookModal = ({price,title,refetch,setTitle}) => {
     const {user} = useContext(AuthContext)
+    
 
     const handleSubmit = event =>{
         event.preventDefault()
@@ -38,8 +39,9 @@ const BookModal = ({price,title,refetch,setTitle}) => {
             if(data.acknowledged){
                 // setTreatment(null)
                 
+                
                 alert('booking successfull')
-                phone='';
+                
                 refetch();
             }
             else {
