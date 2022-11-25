@@ -16,7 +16,7 @@ const Register = () => {
         providerLogin(googleProvider)
             .then(result => {
                 const user = result.user;
-                saveUser(user.name, user.email, 'user');
+                saveUser(user.displayName, user.email, 'user');
                 navigate(from, { replace: true });
                  console.log(user);
                  

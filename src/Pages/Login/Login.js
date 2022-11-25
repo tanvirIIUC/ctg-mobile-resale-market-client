@@ -11,10 +11,10 @@ const Login = () => {
     const from = location.state?.from?.pathname || "/";
 
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const { logIn ,providerLogin} = useContext(AuthContext)
-    const googleProvider = new GoogleAuthProvider();
+    const { logIn } = useContext(AuthContext)
+    // const googleProvider = new GoogleAuthProvider();
 
-    const handleGoogleSignIn = () => {
+  /*   const handleGoogleSignIn = () => {
         providerLogin(googleProvider)
             .then(result => {
                 const user = result.user;
@@ -23,7 +23,7 @@ const Login = () => {
             })
             .catch(error => console.error(error))
     }
-
+ */
     const handleSignup = data => {
         //    console.log(data)
         logIn(data.email, data.password)
@@ -90,7 +90,7 @@ const Login = () => {
                                 <span className="label-text-alt">Don't have account?</span>
                                 <Link to='/register' className='text-primary'>Create Account</Link>
                             </label>
-                            <div className="divider">OR</div>
+                           
 
                             
                         </div>
