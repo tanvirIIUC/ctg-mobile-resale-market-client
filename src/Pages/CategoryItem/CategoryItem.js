@@ -6,6 +6,7 @@ const CategoryItem = () => {
     const collections = useLoaderData();
     const [title,setTitle]= useState('');
     const [price,setPrice]= useState('');
+    const [img,setImg]= useState('');
 
 
     console.log(collections)
@@ -31,6 +32,7 @@ const CategoryItem = () => {
                                     onClick={()=>{
                                         setTitle(collection.title)
                                         setPrice(collection.resalePrice)
+                                        setImg(collection.image)
                                     }}
                                     htmlFor="my-modal" 
                                     className="btn">open modal</label>
@@ -39,6 +41,7 @@ const CategoryItem = () => {
                                     setTitle
                                     title={title}
                                     price={price}
+                                    img={img}
                                 ></BookModal>
                             </div>
                         </div>

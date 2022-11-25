@@ -1,7 +1,8 @@
+import { clear } from '@testing-library/user-event/dist/clear';
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
-const BookModal = ({price,title,refetch,setTitle}) => {
+const BookModal = ({price,title,refetch,img}) => {
     const {user} = useContext(AuthContext)
     
 
@@ -15,6 +16,7 @@ const BookModal = ({price,title,refetch,setTitle}) => {
         const title = form.title.value;
         const price = form.price.value;
         const meetLocation = form.meetLocation.value;
+        // form.clear();
         //  console.log(seller,meetLocation,email,phone,title,price)
         const booking ={
             seller,
@@ -22,6 +24,7 @@ const BookModal = ({price,title,refetch,setTitle}) => {
             email,
             phone,
             price,
+            img,
             meetLocation
 
         }
@@ -37,15 +40,17 @@ const BookModal = ({price,title,refetch,setTitle}) => {
         .then(data =>{
             console.log(data)
             if(data.acknowledged){
-                // setTreatment(null)
+               
                 
                 
                 alert('booking successfull')
+                
                 
                 refetch();
             }
             else {
                 alert(`${data.message}`)
+                
             }
             
         })
@@ -64,8 +69,8 @@ const BookModal = ({price,title,refetch,setTitle}) => {
                         <input name='email' type="email" defaultValue={user?.email} disabled  className="input input-bordered w-full " />
                         <input name='price' type="number" defaultValue={price} disabled  className="input input-bordered w-full " />
                         <input name='title' type="text" defaultValue={title} disabled  className="input input-bordered w-full " />
-                        <input name='phone' type="text" placeholder="phone" className="input input-bordered w-full " />
-                        <input name='meetLocation' type="text" placeholder="meetLocation" className="input input-bordered w-full " />
+                        <input name='phone' type="text" placeholder="phone" required className="input input-bordered w-full " />
+                        <input name='meetLocation' type="text" placeholder="meetLocation" required className="input input-bordered w-full " />
                         <input type="submit" value='submit' className="btn btn-primary w-full text-white  " />
                     </form>
                 </div>
