@@ -12,7 +12,7 @@ const MyOrders = () => {
         queryFn: async () => {
             const res = await fetch(url);
             const data = await res.json();
-            console.log(data)
+            // console.log(data)
             return data;
 
         }
@@ -39,7 +39,7 @@ const MyOrders = () => {
                         </tr>
                         {
                             bookings.map((book, i) =>
-                                <tr>
+                                <tr key={book._id}>
                                     <th>{i + 1}</th>
                                     {/* <td>{book.patient}</td> */}
                                     <td>

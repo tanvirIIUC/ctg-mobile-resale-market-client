@@ -19,7 +19,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 navigate(from, { replace: true });
-                // console.log(user);
+                 console.log(user);
             })
             .catch(error => console.error(error))
     }
@@ -92,7 +92,7 @@ const Login = () => {
                             </label>
                             <div className="divider">OR</div>
 
-                            <button onClick={handleGoogleSignIn} className="btn btn-outline w-full">Continue with Google</button>
+                            
                         </div>
                     </div>
                 </div>

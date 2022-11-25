@@ -38,7 +38,7 @@ const MyProducts = () => {
                       
                         {
                             myproducts.map((product, i) =>
-                                <tr>
+                                <tr key={product._id}>
                                     <th>{i + 1}</th>
                                     {/* <td>{product.patient}</td> */}
                                     <td>

@@ -9,7 +9,7 @@ const CategoryItem = () => {
     const [img,setImg]= useState('');
 
 
-    console.log(collections)
+    // console.log(collections)
     return (
         <div className='container mx-auto my-10'>
             <h1>item : {collections.length}</h1>
