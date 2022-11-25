@@ -2,13 +2,13 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
-
-const MyOrders = () => {
+const MyProducts = () => {
     const { user } = useContext(AuthContext);
-    const url = `http://localhost:5000/bookings?email=${user?.email}`;
 
-    const { data: bookings = [] } = useQuery({
-        queryKey: ['bookings', user?.email],
+    const url = `http://localhost:5000/myproducts?email=${user?.email}`;
+
+    const { data: myproducts = [] } = useQuery({
+        queryKey: ['myproducts', user?.email],
         queryFn: async () => {
             const res = await fetch(url);
             const data = await res.json();
@@ -19,7 +19,7 @@ const MyOrders = () => {
     })
     return (
         <div>
-            <h3 className='text-3xl font-bold my-5'>MY Orders</h3>
+            <h3 className='text-3xl font-bold my-5'>MY Products</h3>
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     {/* <!-- head --> */}
@@ -29,29 +29,31 @@ const MyOrders = () => {
                             <th>Image</th>
                             <th>Title</th>
                             <th>Price</th>
-                            <th>Pay</th>
+                            <th>Status</th>
+                            <th>Delete</th>
+                            <th>Advertise</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {/* <!-- row 1 --> */}
-                        <tr>
-                            
-                        </tr>
+                      
                         {
-                            bookings.map((book, i) =>
+                            myproducts.map((product, i) =>
                                 <tr>
                                     <th>{i + 1}</th>
-                                    {/* <td>{book.patient}</td> */}
+                                    {/* <td>{product.patient}</td> */}
                                     <td>
                                         <div className="avatar">
                                             <div className="mask mask-squircle w-12 h-12">
-                                                <img src={book.img} alt="Avatar Tailwind CSS Component" />
+                                                <img src={product.image} alt="Avatar Tailwind CSS Component" />
                                             </div>
                                         </div>
                                     </td>
-                                    <td>{book.mobileName}</td>
-                                    <td>{book.price}</td>
-                                    <td><button className='btn'>pay</button></td>
+                                    <td>{product.title}</td>
+                                    <td>{product.resalePrice}</td>
+                                    <td>{}</td>
+                                    
+                                    <td><button className='btn'>delete</button></td>
+                                    <td><button className='btn'>ads</button></td>
                                 </tr>
                             )
                         }
@@ -65,4 +67,4 @@ const MyOrders = () => {
     );
 };
 
-export default MyOrders;
+export default MyProducts;
