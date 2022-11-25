@@ -15,7 +15,11 @@ const Navbar = () => {
     const items = <>
         <li><Link to='/'>Home</Link></li>
         {user?.uid ?
-      <li><Link onClick={handleLogout} >Log out</Link></li>
+        <>
+        <li><Link to='/dashboard'>Dashboard</Link></li>
+        <li><Link onClick={handleLogout} >Log out</Link></li>
+        </>
+      
       :
       <li><Link to='/login'>Login</Link></li>}
     </>

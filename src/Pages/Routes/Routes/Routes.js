@@ -1,9 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import CategoryItem from "../../CategoryItem/CategoryItem";
 import Home from "../../Home/Home/Home";
+import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
 import Login from "../../Login/Login";
 import Register from "../../Register/Register";
+import PrivetRouter from "../PrivetRouter/PrivetRouter";
 
 const router = createBrowserRouter([
     {
@@ -24,11 +26,22 @@ const router = createBrowserRouter([
         },
         {
             path:'/categories/:id',
-            element:<CategoryItem></CategoryItem>,
+            element:<PrivetRouter><CategoryItem></CategoryItem></PrivetRouter>,
             loader : ({params}) => fetch(`http://localhost:5000/collection/${params.id}`)
         },
       ]
     },
+    {
+      path:'/dashboard',
+      element:<PrivetRouter><DashboardLayout></DashboardLayout></PrivetRouter>,
+    /*   children:[
+        {
+          path:'/dashboard',
+          element:<Myappointment></Myappointment>
+        },
+      
+      ] */
+    }
   ]);
 
   export default router;
