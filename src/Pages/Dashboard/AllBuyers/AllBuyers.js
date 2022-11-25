@@ -1,13 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
+import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal';
 
 const AllBuyers = () => {
     const { user } = useContext(AuthContext);
+    const [deleteUser,setDeleteUser]= useState(null);
+
+    const closeModal = ()=>{
+        setDeleteUser(null);
+    }
 
     const url = 'http://localhost:5000/allbuyers';
 
-    const { data: allbuyers = [] } = useQuery({
+    const { data: allbuyers = [] ,refetch} = useQuery({
         queryKey: ['allbuyers', user?.email],
         queryFn: async () => {
             const res = await fetch(url);
@@ -17,6 +23,23 @@ const AllBuyers = () => {
 
         }
     })
+
+    const handleDelete = buyer =>{
+        fetch(`http://localhost:5000/buyer/${buyer._id}`,{
+            method: 'DELETE',
+
+
+        })
+        .then(res =>res.json())
+        .then(data =>{
+            // console.log(data);
+            if(data.deletedCount >0){
+                refetch();
+                alert('delete successful')
+            }
+            
+        })
+    }
     return (
         <div>
 
@@ -46,8 +69,9 @@ const AllBuyers = () => {
                                         <td>{buyer.name}</td>
                                         <td>{buyer.email}</td>
                                         <td>{buyer.option}</td>
-
-                                        <td><button className='btn'>delete</button></td>
+                                        <td><label onClick={()=> setDeleteUser(buyer)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label></td>
+                                        {/* <td><button className='btn'>delete</button></td> */}
+                                        
 
                                     </tr>
                                 )
@@ -59,6 +83,17 @@ const AllBuyers = () => {
                 </div>
 
             </div>
+            {
+                deleteUser && <ConfirmationModal
+                title={`Are you sure you want to delete?`}
+                
+                successAction = {handleDelete}
+                modalData = {deleteUser}
+                closeModal={closeModal}
+                >
+
+                </ConfirmationModal>
+              }
         </div>
     );
 };
