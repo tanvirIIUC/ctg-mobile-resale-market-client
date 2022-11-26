@@ -18,7 +18,7 @@ const AllSellers = () => {
         queryFn: async () => {
             const res = await fetch(url);
             const data = await res.json();
-            console.log(data)
+            // console.log(data)
             return data;
 
         }

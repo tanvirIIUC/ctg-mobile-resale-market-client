@@ -5,43 +5,61 @@ import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal'
 
 const MyProducts = () => {
     const { user } = useContext(AuthContext);
-    const [deleteMyProduct,setDeleteMyProduct]= useState(null);
+    const [deleteMyProduct, setDeleteMyProduct] = useState(null);
 
-    const closeModal = ()=>{
+    const closeModal = () => {
         setDeleteMyProduct(null);
     }
 
-    
+
 
 
     const url = `http://localhost:5000/myproducts?email=${user?.email}`;
 
-    const { data: myproducts = [] ,refetch} = useQuery({
+    const { data: myproducts = [], refetch } = useQuery({
         queryKey: ['myproducts', user?.email],
         queryFn: async () => {
             const res = await fetch(url);
             const data = await res.json();
-            console.log(data)
+            // console.log(data)
             return data;
 
         }
     })
 
-    const handleDeleteProduct = product =>{
-        fetch(`http://localhost:5000/product/${product._id}`,{
+    const handleDeleteProduct = product => {
+        fetch(`http://localhost:5000/product/${product._id}`, {
             method: 'DELETE',
 
 
         })
-        .then(res =>res.json())
-        .then(data =>{
-            // console.log(data);
-            if(data.deletedCount >0){
-                refetch();
-                alert('delete successful')
-            }
-            
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data);
+                if (data.deletedCount > 0) {
+                    refetch();
+                    alert('delete successful')
+                }
+
+            })
+    }
+
+    const handleAds = id => {
+
+        fetch(`http://localhost:5000/myproducts/${id}`, {
+            method: 'PUT',
+
+
         })
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data);
+                if(data.modifiedCount>0){
+                    alert("Successfully add to Ads");
+                }
+
+
+            })
     }
 
     return (
@@ -62,7 +80,7 @@ const MyProducts = () => {
                         </tr>
                     </thead>
                     <tbody>
-                      
+
                         {
                             myproducts.map((product, i) =>
                                 <tr key={product._id}>
@@ -77,13 +95,17 @@ const MyProducts = () => {
                                     </td>
                                     <td>{product.title}</td>
                                     <td>{product.resalePrice}</td>
-                                    <td>{}</td>
-                                    
+                                    <td>{ }</td>
+
                                     <td>
-                                    <label onClick={()=> setDeleteMyProduct(product)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label>
-                                        
+                                        <label onClick={() => setDeleteMyProduct(product)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label>
+
                                     </td>
-                                    <td><button  className='btn'>ads</button></td>
+                                    <td>
+                                        { !product.advertise &&
+                                            <button onClick={() => handleAds(product._id)} className='btn btn-sm'>ads</button>
+                                        }
+                                    </td>
                                 </tr>
                             )
                         }
@@ -92,17 +114,17 @@ const MyProducts = () => {
                     </tbody>
                 </table>
             </div>
-              {
+            {
                 deleteMyProduct && <ConfirmationModal
-                title={`Are you sure you want to delete?`}
-                message={`If you delete ${deleteMyProduct.title}. It cannot be undone.`}
-                successAction = {handleDeleteProduct}
-                modalData = {deleteMyProduct}
-                closeModal={closeModal}
+                    title={`Are you sure you want to delete?`}
+                    message={`If you delete ${deleteMyProduct.title}. It cannot be undone.`}
+                    successAction={handleDeleteProduct}
+                    modalData={deleteMyProduct}
+                    closeModal={closeModal}
                 >
 
                 </ConfirmationModal>
-              }
+            }
         </div>
     );
 };

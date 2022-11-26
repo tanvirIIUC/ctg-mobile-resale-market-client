@@ -35,7 +35,7 @@ const CategoryItem = () => {
                                         setImg(collection.image)
                                     }}
                                     htmlFor="my-modal" 
-                                    className="btn">open modal</label>
+                                    className="btn">Buy now</label>
                                 </div>
                                 <BookModal
                                     setTitle
