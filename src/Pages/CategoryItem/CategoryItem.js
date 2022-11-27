@@ -9,10 +9,27 @@ const CategoryItem = () => {
     const [title,setTitle]= useState('');
     const [price,setPrice]= useState('');
     const [img,setImg]= useState('');
+    const [report,setReport] = useState('')
 
     const {user} = useContext(AuthContext)
 
-   
+    const handleReport = id => {
+
+        fetch(`http://localhost:5000/report/${id}`, {
+            method: 'PUT',
+
+
+        })
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data);
+                if(data.modifiedCount>0){
+                    alert("Successfully add to Report");
+                }
+
+
+            })
+    }
 
 
 
@@ -48,7 +65,14 @@ const CategoryItem = () => {
                                     }}
                                     htmlFor="my-modal" 
                                     className="btn">Buy now</label>
+                                    <label 
+                                    onClick={()=>{
+                                        handleReport(collection._id) 
+                                    }}
+                                     
+                                    className="btn btn-xs btn-info">report</label>
                                 </div>
+                               
                                 <BookModal
                                     setTitle
                                     title={title}

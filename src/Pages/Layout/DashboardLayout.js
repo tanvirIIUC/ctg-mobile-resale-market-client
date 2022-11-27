@@ -57,6 +57,7 @@ const DashboardLayout = () => {
                             option === 'admin' && <>
                                 <li><Link to='/dashboard/allsellers'>All Sellers</Link></li>
                                 <li><Link to='/dashboard/allbuyers'>All Buyers</Link></li>
+                                <li><Link to='/dashboard/report'>All Reports</Link></li>
                             </>
                         }
 
