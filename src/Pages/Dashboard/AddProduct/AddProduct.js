@@ -1,14 +1,21 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 const AddProduct = () => {
     const { user } = useContext(AuthContext)
+    const [User,setUser]= useState(null)
+        
+    useEffect(() => {
+        fetch(`http://localhost:5000/userver?email=${user?.email}`)
+            .then(res => res.json())
+            .then(data => setUser(data))
+    }, [user?.email])
 
 
     const handleSubmit = event => {
         event.preventDefault()
         const form = event.target;
-          
+
         const seller = form.name.value;
         const email = form.email.value;
         const phone = form.phone.value;
@@ -20,26 +27,29 @@ const AddProduct = () => {
         const yearOfUse = form.year.value;
         const postTime = form.posttime.value;
         const img = form.img.value;
-         const category = form.category.value;
+        const category = form.category.value;
 
-         const condition = form.condition.value;
+        const condition = form.condition.value;
+
         
+
         // console.log(category)
         //  console.log(seller,email,phone,title,prresalepriceice,orginalprice,description,year,posttime,img,category,condition)
         const booking = {
             category_id: category,
             title,
-            image:img,
-            location:place,
+            image: img,
+            location: place,
             resalePrice,
             orginalPrice,
             postTime,
-            sellerName:seller,
+            sellerName: seller,
             yearOfUse,
             condition,
             email,
             phone,
-            description
+            description,
+            verify: User?.verify
 
         }
         fetch('http://localhost:5000/addproduct', {
@@ -85,7 +95,7 @@ const AddProduct = () => {
                 <input name='place' type="text" placeholder="place" required className="input input-bordered w-full " />
                 <input name='year' type="text" placeholder="Year of use" required className="input input-bordered w-full " />
                 <input name='posttime' type="text" placeholder="Post time" required className="input input-bordered w-full " />
-               
+
                 <input name='img' type="text" placeholder="image link" required className="input input-bordered w-full " />
                 <select name='category' className="select select-bordered w-full  ">
                     <option selected >Category</option>

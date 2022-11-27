@@ -40,6 +40,41 @@ const AllSellers = () => {
 
             })
     }
+
+    const handleVerify = id => {
+
+        fetch(`http://localhost:5000/user/${id}`, {
+            method: 'PUT',
+
+
+        })
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data);
+                if(data.modifiedCount>0){
+                    alert("Successfully verified");
+                }
+
+
+            })
+    }
+    const handleVerifyproduct = email => {
+
+        fetch(`http://localhost:5000/productver?email=${email}`, {
+            method: 'PUT',
+
+
+        })
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data);
+                if(data.modifiedCount>0){
+                    alert("Successfully verified");
+                }
+
+
+            })
+    }
     return (
         <div>
 
@@ -55,6 +90,7 @@ const AllSellers = () => {
                                 <th>Email</th>
                                 <th>Option</th>
                                 <th>Delete</th>
+                                <th>Verify</th>
 
                             </tr>
                         </thead>
@@ -62,7 +98,7 @@ const AllSellers = () => {
 
                             {
                                 allsellers.map((seller, i) =>
-                                    <tr>
+                                    <tr key={seller._id}>
                                         <th>{i + 1}</th>
                                         {/* <td>{seller.patient}</td> */}
 
@@ -71,7 +107,14 @@ const AllSellers = () => {
                                         <td>{seller.option}</td>
                                         <td><label onClick={() => setDeleteUser(seller)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label></td>
 
-
+                                        <td>
+                                            {!seller.verify &&
+                                                <button onClick={() =>{
+                                                    handleVerifyproduct(seller.email)
+                                                    handleVerify(seller._id)
+                                                }} className='btn btn-sm'>verify</button>
+                                            }
+                                        </td>
                                     </tr>
                                 )
                             }

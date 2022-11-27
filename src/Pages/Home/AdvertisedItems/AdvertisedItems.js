@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import { GoVerified } from 'react-icons/go';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 const AdvertisedItems = () => {
@@ -36,6 +37,11 @@ const AdvertisedItems = () => {
                                         <p>year Of Use:{ad.yearOfUse}</p>
                                         <p>Post Time:{ad.postTime}</p>
                                         <p>Seller Name:{ad.sellerName}</p>
+                                        <p>{ad?.verify==='verify' &&
+                                      <p className='text-primary'>
+                                      <GoVerified />
+                                      </p>
+                                }</p>
 
 
                                     </div>

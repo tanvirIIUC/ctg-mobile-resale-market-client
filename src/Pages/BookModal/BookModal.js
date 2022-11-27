@@ -2,7 +2,7 @@ import { clear } from '@testing-library/user-event/dist/clear';
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
-const BookModal = ({price,title,refetch,img}) => {
+const BookModal = ({price,title,img}) => {
     const {user} = useContext(AuthContext)
     
 
@@ -46,7 +46,7 @@ const BookModal = ({price,title,refetch,img}) => {
                 alert('booking successfull')
                 
                 
-                refetch();
+                
             }
             else {
                 alert(`${data.message}`)
