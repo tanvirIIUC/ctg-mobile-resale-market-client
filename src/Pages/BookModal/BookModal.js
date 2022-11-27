@@ -71,7 +71,7 @@ const BookModal = ({price,title,img}) => {
                         <input name='title' type="text" defaultValue={title} disabled  className="input input-bordered w-full " />
                         <input name='phone' type="text" placeholder="phone" required className="input input-bordered w-full " />
                         <input name='meetLocation' type="text" placeholder="meetLocation" required className="input input-bordered w-full " />
-                        <input type="submit" value='submit' className="btn btn-primary w-full text-white  " />
+                        <input type="submit" value='submit'  className="btn btn-primary w-full text-white  " />
                     </form>
                 </div>
             </div>
