@@ -19,7 +19,7 @@ const BookModal = ({price,title,img}) => {
         // form.clear();
         //  console.log(seller,meetLocation,email,phone,title,price)
         const booking ={
-            seller,
+            buyer:seller,
             mobileName:title,
             email,
             phone,

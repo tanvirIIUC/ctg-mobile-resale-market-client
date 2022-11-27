@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal';
 
@@ -79,7 +80,15 @@ const MyOrders = () => {
                                             </td>
                                             <td>{book.mobileName}</td>
                                             <td>{book.price}</td>
-                                            <td><button className='btn'>pay</button></td>
+                                            <td>{
+                                                  !book.paid && <Link 
+                                                  to={`/dashboard/payment/${book._id}`}
+                                                  >
+                                                  <button className='btn btn-primary btn-sm '>pay</button>
+                                                  </Link>
+                                                }  
+                                            </td>
+                                            
                                             <td>
                                                 <label onClick={() => setDeleteMyProduct(book)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label>
 
