@@ -4,17 +4,17 @@ import { Link } from 'react-router-dom';
 const ProductCategories = () => {
     const [categories, setCategories] = useState([]);
 
-    
 
-    
+
+
 
     useEffect(() => {
-        fetch('http://localhost:5000/categories')
+        fetch('https://ctg-mobile-resale-market-server.vercel.app/categories')
             .then(res => res.json())
             .then(data => setCategories(data))
     }, [])
 
-   
+
     return (
         <div className='container mx-auto '>
             <h1 className='text-2xl font-bold text-center'>Product Category</h1>
@@ -29,7 +29,7 @@ const ProductCategories = () => {
                                 <h2 className="card-title">{category.name}</h2>
                                 {/* <p>If a dog chews shoes whose shoes does he choose?</p> */}
                                 <div className="card-actions">
-                                <p className='bg-primary px-3 text-light rounded'><Link className='text-light text-decoration-none' to={`/categories/${category.id}`}> All mobile</Link></p>
+                                    <p className='bg-primary px-3 text-light rounded'><Link className='text-light text-decoration-none' to={`/categories/${category.id}`}> All mobile</Link></p>
                                 </div>
                             </div>
                         </div>

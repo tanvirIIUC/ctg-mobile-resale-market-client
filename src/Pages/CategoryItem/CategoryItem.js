@@ -6,16 +6,16 @@ import { GoVerified } from 'react-icons/go';
 
 const CategoryItem = () => {
     const collections = useLoaderData();
-    const [title,setTitle]= useState('');
-    const [price,setPrice]= useState('');
-    const [img,setImg]= useState('');
-    const [report,setReport] = useState('')
+    const [title, setTitle] = useState('');
+    const [price, setPrice] = useState('');
+    const [img, setImg] = useState('');
+    const [report, setReport] = useState('')
 
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
 
     const handleReport = id => {
 
-        fetch(`http://localhost:5000/report/${id}`, {
+        fetch(`https://ctg-mobile-resale-market-server.vercel.app/report/${id}`, {
             method: 'PUT',
 
 
@@ -23,7 +23,7 @@ const CategoryItem = () => {
             .then(res => res.json())
             .then(data => {
                 // console.log(data);
-                if(data.modifiedCount>0){
+                if (data.modifiedCount > 0) {
                     alert("Successfully add to Report");
                 }
 
@@ -50,29 +50,29 @@ const CategoryItem = () => {
                                 <p>year Of Use:   {collection.yearOfUse}</p>
                                 <p>Post Time:   {collection.postTime}</p>
                                 <p>Seller Name:   {collection.sellerName}</p>
-                                <p>{collection?.verify==='verify' &&
-                                      <p className='text-primary'>
-                                      <GoVerified />
-                                      </p>
+                                <p>{collection?.verify === 'verify' &&
+                                    <p className='text-primary'>
+                                        <GoVerified />
+                                    </p>
                                 }</p>
                                 <div className="card-actions justify-end">
                                     {/* <button className="btn btn-primary">Book Now</button> */}
-                                    <label 
-                                    onClick={()=>{
-                                        setTitle(collection.title)
-                                        setPrice(collection.resalePrice)
-                                        setImg(collection.image)
-                                    }}
-                                    htmlFor="my-modal" 
-                                    className="btn btn-primary btn-sm">Buy now</label>
-                                    <label 
-                                    onClick={()=>{
-                                        handleReport(collection._id) 
-                                    }}
-                                     
-                                    className="btn btn-xs btn-warning">report</label>
+                                    <label
+                                        onClick={() => {
+                                            setTitle(collection.title)
+                                            setPrice(collection.resalePrice)
+                                            setImg(collection.image)
+                                        }}
+                                        htmlFor="my-modal"
+                                        className="btn btn-primary btn-sm">Buy now</label>
+                                    <label
+                                        onClick={() => {
+                                            handleReport(collection._id)
+                                        }}
+
+                                        className="btn btn-xs btn-warning">report</label>
                                 </div>
-                               
+
                                 <BookModal
                                     setTitle
                                     title={title}

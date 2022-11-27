@@ -6,7 +6,7 @@ import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 const AdvertisedItems = () => {
     const { user } = useContext(AuthContext)
 
-    const url = 'http://localhost:5000/ads';
+    const url = 'https://ctg-mobile-resale-market-server.vercel.app/ads';
 
     const { data: ads = [], refetch } = useQuery({
         queryKey: ['ads', user?.email],
@@ -37,11 +37,11 @@ const AdvertisedItems = () => {
                                         <p>year Of Use:{ad.yearOfUse}</p>
                                         <p>Post Time:{ad.postTime}</p>
                                         <p>Seller Name:{ad.sellerName}</p>
-                                        <p>{ad?.verify==='verify' &&
-                                      <p className='text-primary'>
-                                      <GoVerified />
-                                      </p>
-                                }</p>
+                                        <p>{ad?.verify === 'verify' &&
+                                            <p className='text-primary'>
+                                                <GoVerified />
+                                            </p>
+                                        }</p>
 
 
                                     </div>

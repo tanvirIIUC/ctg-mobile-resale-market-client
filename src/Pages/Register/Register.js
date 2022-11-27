@@ -7,18 +7,18 @@ import useToken from '../../Hooks/useToken';
 
 const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const { createUser, updateUserProfile,providerLogin } = useContext(AuthContext);
-    const [createUserEmail,setCreateUserEmail]= useState('');
+    const { createUser, updateUserProfile, providerLogin } = useContext(AuthContext);
+    const [createUserEmail, setCreateUserEmail] = useState('');
     const googleProvider = new GoogleAuthProvider();
     const location = useLocation();
 
-    
+
 
     const [token] = useToken(createUserEmail);
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || "/";
-    if(token){
-         navigate('/');
+    if (token) {
+        navigate('/');
     }
 
     const handleGoogleSignIn = () => {
@@ -27,8 +27,8 @@ const Register = () => {
                 const user = result.user;
                 saveUser(user.displayName, user.email, 'user');
                 navigate(from, { replace: true });
-                 console.log(user);
-                 
+                console.log(user);
+
             })
             .catch(error => console.error(error))
     }
@@ -62,7 +62,7 @@ const Register = () => {
 
     const saveUser = (name, email, option) => {
         const users = { name, email, option };
-        fetch('http://localhost:5000/users', {
+        fetch('https://ctg-mobile-resale-market-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -72,8 +72,8 @@ const Register = () => {
         })
             .then(res => res.json())
             .then(data => {
-                
-                
+
+
                 // console.log(data)
                 if (data.acknowledged) {
                     // setTreatment(null)
@@ -91,7 +91,7 @@ const Register = () => {
             })
     }
 
- 
+
 
     return (
 

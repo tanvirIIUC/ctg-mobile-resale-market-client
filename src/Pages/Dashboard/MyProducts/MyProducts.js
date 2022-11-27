@@ -14,14 +14,14 @@ const MyProducts = () => {
 
 
 
-    const url = `http://localhost:5000/myproducts?email=${user?.email}`;
+    const url = `https://ctg-mobile-resale-market-server.vercel.app/myproducts?email=${user?.email}`;
 
     const { data: myproducts = [], refetch } = useQuery({
         queryKey: ['myproducts', user?.email],
         queryFn: async () => {
             const res = await fetch(url, {
                 headers: {
-                    authorization : `bearer ${localStorage.getItem('accessToken')}`
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
             });
             const data = await res.json();
@@ -32,7 +32,7 @@ const MyProducts = () => {
     })
 
     const handleDeleteProduct = product => {
-        fetch(`http://localhost:5000/product/${product._id}`, {
+        fetch(`https://ctg-mobile-resale-market-server.vercel.app/product/${product._id}`, {
             method: 'DELETE',
 
 
@@ -50,7 +50,7 @@ const MyProducts = () => {
 
     const handleAds = id => {
 
-        fetch(`http://localhost:5000/myproducts/${id}`, {
+        fetch(`https://ctg-mobile-resale-market-server.vercel.app/myproducts/${id}`, {
             method: 'PUT',
 
 
@@ -58,7 +58,7 @@ const MyProducts = () => {
             .then(res => res.json())
             .then(data => {
                 // console.log(data);
-                if(data.modifiedCount>0){
+                if (data.modifiedCount > 0) {
                     alert("Successfully add to Ads");
                 }
 
@@ -106,7 +106,7 @@ const MyProducts = () => {
 
                                     </td>
                                     <td>
-                                        { !product.advertise &&
+                                        {!product.advertise &&
                                             <button onClick={() => handleAds(product._id)} className='btn btn-sm'>ads</button>
                                         }
                                     </td>

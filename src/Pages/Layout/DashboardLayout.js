@@ -9,7 +9,7 @@ const DashboardLayout = () => {
     const { user } = useContext(AuthContext);
     const [option, setOption] = useState('')
 
-    const url = `http://localhost:5000/user?email=${user?.email}`;
+    const url = `https://ctg-mobile-resale-market-server.vercel.app/user?email=${user?.email}`;
 
     const { data: User = [] } = useQuery({
         queryKey: ['User', user?.email],

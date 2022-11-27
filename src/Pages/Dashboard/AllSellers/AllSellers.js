@@ -11,7 +11,7 @@ const AllSellers = () => {
         setDeleteUser(null);
     }
 
-    const url = 'http://localhost:5000/allsellers';
+    const url = 'https://ctg-mobile-resale-market-server.vercel.app/allsellers';
 
     const { data: allsellers = [], refetch } = useQuery({
         queryKey: ['allsellers', user?.email],
@@ -25,7 +25,7 @@ const AllSellers = () => {
     })
 
     const handleDelete = seller => {
-        fetch(`http://localhost:5000/seller/${seller._id}`, {
+        fetch(`https://ctg-mobile-resale-market-server.vercel.app/seller/${seller._id}`, {
             method: 'DELETE',
 
 
@@ -43,7 +43,7 @@ const AllSellers = () => {
 
     const handleVerify = id => {
 
-        fetch(`http://localhost:5000/user/${id}`, {
+        fetch(`https://ctg-mobile-resale-market-server.vercel.app/user/${id}`, {
             method: 'PUT',
 
 
@@ -51,7 +51,7 @@ const AllSellers = () => {
             .then(res => res.json())
             .then(data => {
                 // console.log(data);
-                if(data.modifiedCount>0){
+                if (data.modifiedCount > 0) {
                     alert("Successfully verified");
                 }
 
@@ -60,7 +60,7 @@ const AllSellers = () => {
     }
     const handleVerifyproduct = email => {
 
-        fetch(`http://localhost:5000/productver?email=${email}`, {
+        fetch(`https://ctg-mobile-resale-market-server.vercel.app/productver?email=${email}`, {
             method: 'PUT',
 
 
@@ -68,7 +68,7 @@ const AllSellers = () => {
             .then(res => res.json())
             .then(data => {
                 // console.log(data);
-                if(data.modifiedCount>0){
+                if (data.modifiedCount > 0) {
                     alert("Successfully verified");
                 }
 
@@ -109,7 +109,7 @@ const AllSellers = () => {
 
                                         <td>
                                             {!seller.verify &&
-                                                <button onClick={() =>{
+                                                <button onClick={() => {
                                                     handleVerifyproduct(seller.email)
                                                     handleVerify(seller._id)
                                                 }} className='btn btn-sm'>verify</button>

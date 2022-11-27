@@ -5,15 +5,15 @@ import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal'
 
 const AllBuyers = () => {
     const { user } = useContext(AuthContext);
-    const [deleteUser,setDeleteUser]= useState(null);
+    const [deleteUser, setDeleteUser] = useState(null);
 
-    const closeModal = ()=>{
+    const closeModal = () => {
         setDeleteUser(null);
     }
 
-    const url = 'http://localhost:5000/allbuyers';
+    const url = 'https://ctg-mobile-resale-market-server.vercel.app/allbuyers';
 
-    const { data: allbuyers = [] ,refetch} = useQuery({
+    const { data: allbuyers = [], refetch } = useQuery({
         queryKey: ['allbuyers', user?.email],
         queryFn: async () => {
             const res = await fetch(url);
@@ -24,21 +24,21 @@ const AllBuyers = () => {
         }
     })
 
-    const handleDelete = buyer =>{
-        fetch(`http://localhost:5000/buyer/${buyer._id}`,{
+    const handleDelete = buyer => {
+        fetch(`https://ctg-mobile-resale-market-server.vercel.app/buyer/${buyer._id}`, {
             method: 'DELETE',
 
 
         })
-        .then(res =>res.json())
-        .then(data =>{
-            // console.log(data);
-            if(data.deletedCount >0){
-                refetch();
-                alert('delete successful')
-            }
-            
-        })
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data);
+                if (data.deletedCount > 0) {
+                    refetch();
+                    alert('delete successful')
+                }
+
+            })
     }
     return (
         <div>
@@ -69,9 +69,9 @@ const AllBuyers = () => {
                                         <td>{buyer.name}</td>
                                         <td>{buyer.email}</td>
                                         <td>{buyer.option}</td>
-                                        <td><label onClick={()=> setDeleteUser(buyer)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label></td>
+                                        <td><label onClick={() => setDeleteUser(buyer)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label></td>
                                         {/* <td><button className='btn'>delete</button></td> */}
-                                        
+
 
                                     </tr>
                                 )
@@ -85,15 +85,15 @@ const AllBuyers = () => {
             </div>
             {
                 deleteUser && <ConfirmationModal
-                title={`Are you sure you want to delete?`}
-                
-                successAction = {handleDelete}
-                modalData = {deleteUser}
-                closeModal={closeModal}
+                    title={`Are you sure you want to delete?`}
+
+                    successAction={handleDelete}
+                    modalData={deleteUser}
+                    closeModal={closeModal}
                 >
 
                 </ConfirmationModal>
-              }
+            }
         </div>
     );
 };

@@ -1,7 +1,7 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
 
-const CheckoutForm = ({booking}) => {
+const CheckoutForm = ({ booking }) => {
     const stripe = useStripe();
     const elements = useElements();
     const [cardError, setCardError] = useState('');
@@ -9,18 +9,18 @@ const CheckoutForm = ({booking}) => {
     const [transactionId, setTransactionId] = useState('');
     const [clientSecret, setClientSecret] = useState("");
 
-    const{price,email,buyer, _id}=booking;
+    const { price, email, buyer, _id } = booking;
 
     useEffect(() => {
-        
-        fetch("http://localhost:5000/create-payment-intent", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({price}),
+
+        fetch("https://ctg-mobile-resale-market-server.vercel.app/create-payment-intent", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ price }),
         })
-          .then((res) => res.json())
-          .then((data) => setClientSecret(data.clientSecret));
-      }, [price]);
+            .then((res) => res.json())
+            .then((data) => setClientSecret(data.clientSecret));
+    }, [price]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -45,56 +45,56 @@ const CheckoutForm = ({booking}) => {
             console.log('[PaymentMethod]', paymentMethod);
             setCardError('')
         }
-            
+
         setSuccess('')
-        const {paymentIntent, error: confirmErrore} = await stripe.confirmCardPayment(
+        const { paymentIntent, error: confirmErrore } = await stripe.confirmCardPayment(
             clientSecret,
             {
-              payment_method: {
-                card: card,
-                billing_details: {
-                  name: buyer,
-                  email:email
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        name: buyer,
+                        email: email
+                    },
                 },
-              },
             },
-          );
+        );
 
-          if(confirmErrore){
+        if (confirmErrore) {
             setCardError(confirmErrore.message);
             return;
-          }
+        }
 
-          if(paymentIntent.status==="succeeded"){
+        if (paymentIntent.status === "succeeded") {
             console.log(card)
             /* setSuccess("payment successful");
             setTransactionId(paymentIntent.id); */
-            
+
             const payment = {
-                   price,
-                   transactionId: paymentIntent.id,
-                   email,
-                   bookingId : _id
+                price,
+                transactionId: paymentIntent.id,
+                email,
+                bookingId: _id
 
 
             }
 
-            fetch('http://localhost:5000/payments',{
+            fetch('https://ctg-mobile-resale-market-server.vercel.app/payments', {
                 method: 'POST',
                 headers: {
-                    'content-type' : 'application/json'
+                    'content-type': 'application/json'
                 },
-                body : JSON.stringify(payment)
+                body: JSON.stringify(payment)
             })
-            .then(res =>res.json())
-            .then(data =>{
-                console.log(data);
-                if(data.insertedId){
-                    setSuccess("payment successful");
-                    setTransactionId(paymentIntent.id);
-                }
-            })
-          }
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.insertedId) {
+                        setSuccess("payment successful");
+                        setTransactionId(paymentIntent.id);
+                    }
+                })
+        }
         //   console.log(paymentIntent);
 
 
@@ -121,16 +121,16 @@ const CheckoutForm = ({booking}) => {
                     }}
                 />
                 <button className='btn btn-sm btn-primary my-5'
-                 type="submit"
-                 disabled={!stripe || !clientSecret}>
+                    type="submit"
+                    disabled={!stripe || !clientSecret}>
                     Pay
                 </button>
             </form>
             <p className='text-red-600'>{cardError}</p>
             {
                 success && <div>
-                 <p className='text-green-500'>{success}</p>
-                 <p>Your transactionId : <span className='font-bold'>{transactionId}</span></p>
+                    <p className='text-green-500'>{success}</p>
+                    <p>Your transactionId : <span className='font-bold'>{transactionId}</span></p>
                 </div>
             }
         </>

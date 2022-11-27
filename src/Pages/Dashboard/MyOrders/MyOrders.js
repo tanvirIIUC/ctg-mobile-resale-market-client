@@ -13,7 +13,7 @@ const MyOrders = () => {
         setDeleteMyProduct(null);
     }
 
-    const url = `http://localhost:5000/bookings?email=${user?.email}`;
+    const url = `https://ctg-mobile-resale-market-server.vercel.app/bookings?email=${user?.email}`;
 
     const { data: bookings = [], refetch } = useQuery({
         queryKey: ['bookings', user?.email],
@@ -27,7 +27,7 @@ const MyOrders = () => {
     })
 
     const handleDeleteProduct = book => {
-        fetch(`http://localhost:5000/bookings/${book._id}`, {
+        fetch(`https://ctg-mobile-resale-market-server.vercel.app/bookings/${book._id}`, {
             method: 'DELETE',
 
 

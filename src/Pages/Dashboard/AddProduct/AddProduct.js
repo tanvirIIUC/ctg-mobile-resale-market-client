@@ -3,10 +3,10 @@ import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 const AddProduct = () => {
     const { user } = useContext(AuthContext)
-    const [User,setUser]= useState(null)
-        
+    const [User, setUser] = useState(null)
+
     useEffect(() => {
-        fetch(`http://localhost:5000/userver?email=${user?.email}`)
+        fetch(`https://ctg-mobile-resale-market-server.vercel.app/userver?email=${user?.email}`)
             .then(res => res.json())
             .then(data => setUser(data))
     }, [user?.email])
@@ -31,7 +31,7 @@ const AddProduct = () => {
 
         const condition = form.condition.value;
 
-        
+
 
         // console.log(category)
         //  console.log(seller,email,phone,title,prresalepriceice,orginalprice,description,year,posttime,img,category,condition)
@@ -52,7 +52,7 @@ const AddProduct = () => {
             verify: User?.verify
 
         }
-        fetch('http://localhost:5000/addproduct', {
+        fetch('https://ctg-mobile-resale-market-server.vercel.app/addproduct', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -68,7 +68,7 @@ const AddProduct = () => {
 
 
                     alert('Add successfull')
-                    
+
 
                     // refetch();
                 }

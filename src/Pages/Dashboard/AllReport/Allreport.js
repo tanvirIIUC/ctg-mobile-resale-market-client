@@ -4,7 +4,7 @@ import { GoVerified } from 'react-icons/go';
 
 const Allreport = () => {
 
-    const url ='http://localhost:5000/report';
+    const url = 'https://ctg-mobile-resale-market-server.vercel.app/report';
 
     const { data: report = [], } = useQuery({
         queryKey: ['report',],
@@ -33,14 +33,14 @@ const Allreport = () => {
                                 <p>Post Time:   {rep.postTime}</p>
                                 <p>Seller Name:   {rep.sellerName}</p>
                                 <p className='text-red-700'>Report</p>
-                                <p>{rep?.verify==='verify' &&
-                                      <p className='text-primary'>
-                                      <GoVerified />
-                                      </p>
+                                <p>{rep?.verify === 'verify' &&
+                                    <p className='text-primary'>
+                                        <GoVerified />
+                                    </p>
                                 }</p>
-                               
-                               
-                              
+
+
+
                             </div>
                         </div>
                     </div>)

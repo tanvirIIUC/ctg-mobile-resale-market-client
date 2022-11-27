@@ -46,7 +46,7 @@ const router = createBrowserRouter([
       {
         path: '/categories/:id',
         element: <PrivetRouter><CategoryItem></CategoryItem></PrivetRouter>,
-        loader: ({ params }) => fetch(`http://localhost:5000/collection/${params.id}`)
+        loader: ({ params }) => fetch(`https://ctg-mobile-resale-market-server.vercel.app/collection/${params.id}`)
       },
     ]
   },
@@ -81,7 +81,7 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/payment/:id',
         element: <Payment></Payment>,
-        loader: ({params}) => fetch(`http://localhost:5000/bookingpay/${params.id}`)
+        loader: ({ params }) => fetch(`https://ctg-mobile-resale-market-server.vercel.app/bookingpay/${params.id}`)
       },
 
     ]
