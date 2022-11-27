@@ -64,13 +64,13 @@ const CategoryItem = () => {
                                         setImg(collection.image)
                                     }}
                                     htmlFor="my-modal" 
-                                    className="btn">Buy now</label>
+                                    className="btn btn-primary btn-sm">Buy now</label>
                                     <label 
                                     onClick={()=>{
                                         handleReport(collection._id) 
                                     }}
                                      
-                                    className="btn btn-xs btn-info">report</label>
+                                    className="btn btn-xs btn-warning">report</label>
                                 </div>
                                
                                 <BookModal

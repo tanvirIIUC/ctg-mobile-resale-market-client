@@ -1,8 +1,9 @@
 import { GoogleAuthProvider } from 'firebase/auth';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
+import useToken from '../../Hooks/useToken';
 
 const Login = () => {
 
@@ -12,18 +13,14 @@ const Login = () => {
 
     const { register, formState: { errors }, handleSubmit } = useForm();
     const { logIn } = useContext(AuthContext)
-    // const googleProvider = new GoogleAuthProvider();
+    const [loginUserEmail,setLoginUserEmail]= useState('');
+   
+    const [token]= useToken(loginUserEmail);
 
-  /*   const handleGoogleSignIn = () => {
-        providerLogin(googleProvider)
-            .then(result => {
-                const user = result.user;
-                navigate(from, { replace: true });
-                 console.log(user);
-            })
-            .catch(error => console.error(error))
+    if(token){
+        navigate(from, { replace: true });
     }
- */
+ 
     const handleSignup = data => {
         //    console.log(data)
         logIn(data.email, data.password)
@@ -31,7 +28,8 @@ const Login = () => {
 
                 const user = result.user;
                 alert("log in Successfull")
-                navigate(from, { replace: true });
+                setLoginUserEmail(data.email)
+                
 
             })
             .catch((error) => {

@@ -1,16 +1,25 @@
 import { GoogleAuthProvider } from 'firebase/auth';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
+import useToken from '../../Hooks/useToken';
 
 const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const { createUser, updateUserProfile,providerLogin } = useContext(AuthContext);
+    const [createUserEmail,setCreateUserEmail]= useState('');
     const googleProvider = new GoogleAuthProvider();
     const location = useLocation();
+
+    
+
+    const [token] = useToken(createUserEmail);
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || "/";
+    if(token){
+         navigate('/');
+    }
 
     const handleGoogleSignIn = () => {
         providerLogin(googleProvider)
@@ -40,7 +49,7 @@ const Register = () => {
                 }
                 updateUserProfile(profile)
                     .then(() => {
-                        navigate('/login')
+                        // navigate('/login')
                     })
                     .catch(error => console.error(error));
 
@@ -63,9 +72,12 @@ const Register = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                
+                
+                // console.log(data)
                 if (data.acknowledged) {
                     // setTreatment(null)
+                    setCreateUserEmail(email)
 
 
                     alert('create successfull')
@@ -78,6 +90,8 @@ const Register = () => {
 
             })
     }
+
+ 
 
     return (
 
