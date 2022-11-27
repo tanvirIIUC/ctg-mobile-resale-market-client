@@ -9,7 +9,7 @@ const CheckoutForm = ({booking}) => {
     const [transactionId, setTransactionId] = useState('');
     const [clientSecret, setClientSecret] = useState("");
 
-    const{price,email,buyer}=booking;
+    const{price,email,buyer, _id}=booking;
 
     useEffect(() => {
         
@@ -66,9 +66,34 @@ const CheckoutForm = ({booking}) => {
           }
 
           if(paymentIntent.status==="succeeded"){
-            setSuccess("payment successful");
-            setTransactionId(paymentIntent.id);
+            console.log(card)
+            /* setSuccess("payment successful");
+            setTransactionId(paymentIntent.id); */
             
+            const payment = {
+                   price,
+                   transactionId: paymentIntent.id,
+                   email,
+                   bookingId : _id
+
+
+            }
+
+            fetch('http://localhost:5000/payments',{
+                method: 'POST',
+                headers: {
+                    'content-type' : 'application/json'
+                },
+                body : JSON.stringify(payment)
+            })
+            .then(res =>res.json())
+            .then(data =>{
+                console.log(data);
+                if(data.insertedId){
+                    setSuccess("payment successful");
+                    setTransactionId(paymentIntent.id);
+                }
+            })
           }
         //   console.log(paymentIntent);
 

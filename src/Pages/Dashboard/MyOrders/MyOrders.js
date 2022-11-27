@@ -58,6 +58,7 @@ const MyOrders = () => {
                                     <th>Title</th>
                                     <th>Price</th>
                                     <th>Pay</th>
+                                    <th>Status</th>
                                     <th>Delete</th>
                                 </tr>
                             </thead>
@@ -86,6 +87,14 @@ const MyOrders = () => {
                                                   >
                                                   <button className='btn btn-primary btn-sm '>pay</button>
                                                   </Link>
+                                                }  
+                                            </td>
+                                            <td>{
+                                                  book.paid && 
+                                                  
+                                                  
+                                                  <button className='btn btn-primary btn-sm '>payed</button>
+                                                  
                                                 }  
                                             </td>
                                             
