@@ -86,7 +86,7 @@ const MyProducts = () => {
                     <tbody>
 
                         {
-                            myproducts.map((product, i) =>
+                            myproducts?.map((product, i) =>
                                 <tr key={product._id}>
                                     <th>{i + 1}</th>
                                     {/* <td>{product.patient}</td> */}

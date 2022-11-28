@@ -4,7 +4,7 @@ import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
-    // console.log(user)
+    console.log(user)
 
     //logout
     const handleLogout = () => {
@@ -49,6 +49,9 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
+                {user?.uid &&
+                <h1>{user.displayName}</h1>
+                               }
                     {/* <a className="btn">Get started</a> */}
                 </div>
             </div>

@@ -45,8 +45,8 @@ const CategoryItem = () => {
                             <div className="card-body">
                                 <h2 className="card-title">{collection.title}</h2>
                                 <p>Location:   {collection.location}</p>
-                                <p>Resale  Price:   {collection.resalePrice}</p>
-                                <p>Orginal Price:   {collection.orginalPrice}</p>
+                                <p>Resale  Price: $   {collection.resalePrice}</p>
+                                <p>Orginal Price: $  {collection.orginalPrice}</p>
                                 <p>year Of Use:   {collection.yearOfUse}</p>
                                 <p>Post Time:   {collection.postTime}</p>
                                 <p>Seller Name:   {collection.sellerName}</p>

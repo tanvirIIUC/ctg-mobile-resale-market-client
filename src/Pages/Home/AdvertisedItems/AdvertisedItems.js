@@ -32,8 +32,8 @@ const AdvertisedItems = () => {
                                     <div className="card-body">
                                         <h2 className="card-title">{ad.title}</h2>
                                         <p>Location:{ad.location}</p>
-                                        <p>Resale  Price:{ad.resalePrice}</p>
-                                        <p>Orginal Price:{ad.orginalPrice}</p>
+                                        <p>Resale  Price: $ {ad.resalePrice}</p>
+                                        <p>Orginal Price: $ {ad.orginalPrice}</p>
                                         <p>year Of Use:{ad.yearOfUse}</p>
                                         <p>Post Time:{ad.postTime}</p>
                                         <p>Seller Name:{ad.sellerName}</p>
